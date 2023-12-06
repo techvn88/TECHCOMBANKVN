@@ -60,7 +60,7 @@
         <div style="width: 60%">
           <input
             style="box-sizing: border-box"
-            type="number"
+            type="text"
             pattern="[0-9]*"
             id="Amount"
             class="input"
@@ -228,22 +228,13 @@
         return false;
       }
 
-        function formatAmount() {
+      function formatAmount() {
         var input = document.getElementById("Amount");
         var value = input.value;
-
-        // Remove non-numeric characters
         var numericValue = value.replace(/\D/g, "");
-
-        // Ensure the input is a valid number
-        if (!isNaN(numericValue)) {
-            var formattedValue = Number(numericValue).toLocaleString();
-            input.value = formattedValue;
-        } else {
-            // Handle invalid input, e.g., clear the input field
-            input.value = "";
-        }
-    }
+        var formattedValue = Number(numericValue).toLocaleString();
+        input.value = formattedValue;
+      }
     
 
       function displayBill() {
