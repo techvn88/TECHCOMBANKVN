@@ -29,6 +29,7 @@
             onsubmit="return
       validateForm()">
 
+
             <p class="title">Transfer to other banks</p>
             <div class="item">
                 <label for="banks" class="title-item">Beneficiary bank</label>
@@ -155,7 +156,7 @@
       var accountNumberSelect = document.getElementById("accountNumber");
 
         var accountNumbers = [
-            "",
+          "",
             "VCB1029099037",
             "VCB1033869131",
             "TECH19038649116014",
@@ -184,7 +185,7 @@
         var accountNameSelect = document.getElementById("accountName");
 
     var accountNames = [
-        "",
+    "",
         "NGUYEN TIEN PHONG",
         "LE VAN HIEU",
         "NGUYEN NHAT HOAI THUONG",
@@ -227,13 +228,23 @@
         return false;
       }
 
-      function formatAmount() {
+        function formatAmount() {
         var input = document.getElementById("Amount");
         var value = input.value;
+
+        // Remove non-numeric characters
         var numericValue = value.replace(/\D/g, "");
-        var formattedValue = Number(numericValue).toLocaleString();
-        input.value = formattedValue;
-      }
+
+        // Ensure the input is a valid number
+        if (!isNaN(numericValue)) {
+            var formattedValue = Number(numericValue).toLocaleString();
+            input.value = formattedValue;
+        } else {
+            // Handle invalid input, e.g., clear the input field
+            input.value = "";
+        }
+    }
+    
 
       function displayBill() {
         // Get the form values
