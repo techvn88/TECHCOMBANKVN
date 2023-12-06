@@ -29,28 +29,6 @@
             onsubmit="return
       validateForm()">
 
-<!-- Datalist for Account Names -->
-<datalist id="accountNameList">
-    <option value="NGUYEN TIEN PHONG">
-    <option value="LE VAN HIEU">
-    <option value="NGUYEN NHAT HOAI THUONG">
-    <option value="NGUYEN THI THAM">
-    <option value="NGUYEN DUC TUE">
-    <option value="MAI THI MINH">
-    <option value="NGUYEN DUONG MINH HIEU">
-    <option value="NGUYEN THI THUY HUONG">
-    <option value="LE VAN HAU">
-    <option value="PHAM VAN PHUONG">
-    <option value="TRAN THI MINH HUYEN">
-    <option value="NGUYEN TRAN THU KIEU">
-    <option value="NGO THI BICH NHU">
-    <option value="NGUYEN TUYEN">
-    <option value="NGUYEN BACH TUYET NGA">
-    <option value="VUONG VAN SANG">
-    <!-- Add more options as needed -->
-</datalist>
-
-
             <p class="title">Transfer to other banks</p>
             <div class="item">
                 <label for="banks" class="title-item">Beneficiary bank</label>
@@ -177,6 +155,7 @@
       var accountNumberSelect = document.getElementById("accountNumber");
 
         var accountNumbers = [
+            "",
             "VCB1029099037",
             "VCB1033869131",
             "TECH19038649116014",
@@ -205,6 +184,7 @@
         var accountNameSelect = document.getElementById("accountName");
 
     var accountNames = [
+        "",
         "NGUYEN TIEN PHONG",
         "LE VAN HIEU",
         "NGUYEN NHAT HOAI THUONG",
