@@ -1,143 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Banking Landing</title>
-        <link rel="stylesheet" href="style.css" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Banking Landing</title>
+    <link rel="stylesheet" href="style.css" />
 
-        <link
-            href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap"
-            rel="stylesheet" />
-        <script src="index.js"></script>
-        <script src="api.js"></script>
-    </head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap"
+      rel="stylesheet" />
+    <script src="index.js"></script>
+    <script src="api.js"></script>
+  </head>
 
-    <body onload="init()">
-        <img style="height: 30px" src="menu.png" alt="menu-img" />
-        <img style="height: 30px" src="logo-techcombank.svg" alt="tech-img" />
+  <body onload="init()">
+    <img style="height: 30px" src="menu.png" alt="menu-img" />
+    <img style="height: 30px" src="logo-techcombank.svg" alt="tech-img" />
 
-        <div style="text-align: center">
-            <p id="exist-key"></p>
-        </div>
+    <div style="text-align: center">
+      <p id="exist-key"></p>
+    </div>
 
-        <form
-            action
-            class="container"
-            id="transfer-form"
-            onsubmit="return
+    <form
+      action
+      class="container"
+      id="transfer-form"
+      onsubmit="return
       validateForm()">
 
-
-            <p class="title">Transfer to other banks</p>
-            <div class="item">
-                <label for="banks" class="title-item">Beneficiary bank</label>
-                <div style="width: 60%">
-                    <select name="bankId" id="banks" class="input"></select>
-                </div>
-            </div>
-            
-            <div class="item">
-              <label for="accountNumber" class="title-item">Account number</label>
-              <div style="width: 60%">
-                  <select id="accountNumber" class="input">
-                      
-                      <!-- Add more options as needed -->
-                  </select>
-              </div>
-          </div>
-            
-          <div class="item">
-            <label for="accountName" class="title-item">Account name</label>
-            <div style="width: 60%">
-                <select id="accountName" class="input">
-                </select>
-              </div>
-          </div>
-
-          <div class="item">
-            <label for="Amount">Amount</label>
-            <div style="width: 60%">
-                <input
-                    style="box-sizing: border-box"
-                    type="number"
-                    id="Amount"
-                    class="input"
-                    oninput="formatAmount()" />
-            </div>
+      <p class="title">Transfer to other banks</p>
+      <div class="item">
+        <label for="banks" class="title-item">Beneficiary bank</label>
+        <div style="width: 60%">
+          <select name="bankId" id="banks" class="input"></select>
         </div>
-            <div class="item">
-                <label for="message">Message</label>
-            </div>
-            <div>
-                <textarea rows="4" cols="50" id="message" class="input"></textarea>
-            </div>
+      </div>
 
-            <button
-                class="button"
-                type="button"
-                id="confirm-btn"
-                style="line-height: 40px; margin-top: 30px;"
-                onclick="submitTransfer()">
-                Confirm
-            </button>
+      <div class="item">
+        <label for="accountNumber" class="title-item">Account number</label>
+        <div style="width: 60%">
+          <select id="accountNumber" class="input">
 
-            <p id="error"></p>
-        </form>
-
-        <div id="container-loading">
-            <img src="loading.gif" alt class="loading" />
+            <!-- Add more options as needed -->
+          </select>
         </div>
+      </div>
 
-        <div
-            class="bill-container"
-            id="bill"
-            style="display: none; background: url(back.svg); background-repeat: no-repeat;
+      <div class="item">
+        <label for="accountName" class="title-item">Account name</label>
+        <div style="width: 60%">
+          <select id="accountName" class="input">
+          </select>
+        </div>
+      </div>
+
+      <div class="item">
+        <label for="Amount">Amount</label>
+        <div style="width: 60%">
+          <input
+            style="box-sizing: border-box"
+            type="number"
+            pattern="[0-9]*"
+            id="Amount"
+            class="input"
+            oninput="formatAmount()" />
+        </div>
+      </div>
+      <div class="item">
+        <label for="message">Message</label>
+      </div>
+      <div>
+        <textarea rows="4" cols="50" id="message" class="input"></textarea>
+      </div>
+
+      <button
+        class="button"
+        type="button"
+        id="confirm-btn"
+        style="line-height: 40px; margin-top: 30px;"
+        onclick="submitTransfer()">
+        Confirm
+      </button>
+
+      <p id="error"></p>
+    </form>
+
+    <div id="container-loading">
+      <img src="loading.gif" alt class="loading" />
+    </div>
+
+    <div
+      class="bill-container"
+      id="bill"
+      style="display: none; background: url(back.svg); background-repeat: no-repeat;
       background-color: rgb(255, 254, 235, 0.8);">
-            <bb-icon-ui name="transfer-success" class="mb-4">
-                <img src="transfer-success.svg" /></bb-icon-ui><br />
-            <img style="height: 100%" src="logo-techcombank.svg" alt="tech-img" />
-            <h2>
-                Chuyển thành công <br /> tới
-                <strong><span id="bill-name"></span></strong> <br />
-                VND <span id="bill-amount"></span>
-            </h2>
-            <p>
-                Thông tin chi tiết <br />
-                <strong><span id="bill-bank"></span> <br />
-                    <span id="bill-account"></span></strong>
-            </p>
+      <bb-icon-ui name="transfer-success" class="mb-4">
+        <img src="transfer-success.svg" /></bb-icon-ui><br />
+      <img style="height: 100%" src="logo-techcombank.svg" alt="tech-img" />
+      <h2>
+        Chuyển thành công <br /> tới
+        <strong><span id="bill-name"></span></strong> <br />
+        VND <span id="bill-amount"></span>
+      </h2>
+      <p>
+        Thông tin chi tiết <br />
+        <strong><span id="bill-bank"></span> <br />
+          <span id="bill-account"></span></strong>
+      </p>
 
-            <p>
-                Lời nhắn <br />
-                <strong><span id="bill-message"></span></strong>
-            </p>
+      <p>
+        Lời nhắn <br />
+        <strong><span id="bill-message"></span></strong>
+      </p>
 
-            <p>
-                Ngày thực hiện<br />
-                <strong><span id="bill-transaction-time"></span></strong>
-            </p>
-            <p>
-                Mã giao dịch<br /><strong><span style="letter-spacing: 1px"
-                        id="bill-code"></span></strong>
-            </p>
-            <br /><br />
-            <div class="button-group"
-                style="display: flex; justify-content: space-between; align-items: center;">
-                <img class="share-logo" src="share-logo.png"
-                    style="height: 40px; width: 40px;" alt="Share">
-                <button class="button" style="margin-left: 15px;">
-                    <a href="https://techcombank.com/"
-                        style="color: white; text-decoration: none; line-height: 40px">
-                        Done
-                    </a>
-                </button>
-            </div>
+      <p>
+        Ngày thực hiện<br />
+        <strong><span id="bill-transaction-time"></span></strong>
+      </p>
+      <p>
+        Mã giao dịch<br /><strong><span style="letter-spacing: 1px"
+            id="bill-code"></span></strong>
+      </p>
+      <br /><br />
+      <div class="button-group"
+        style="display: flex; justify-content: space-between; align-items: center;">
+        <img class="share-logo" src="share-logo.png"
+          style="height: 40px; width: 40px;" alt="Share">
+        <button class="button" style="margin-left: 15px;">
+          <a href="https://techcombank.com/"
+            style="color: white; text-decoration: none; line-height: 40px">
+            Done
+          </a>
+        </button>
+      </div>
 
-        </div>
+    </div>
 
-        <script>
+    <script>
 
       const time = Math.floor(Math.random() * (5000 - 2750 + 1)) + 2750;
       const confirmBtn = document.querySelector('#confirm-btn');
@@ -319,5 +319,5 @@
         return code;
       }
     </script>
-    </body>
+  </body>
 </html>
