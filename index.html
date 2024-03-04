@@ -168,7 +168,6 @@
             "TECH19021321689025",
             "BIDV17710000420961",
             "VCB0181003639748",
-            "MB3750175864396",
             "TP09393586145",
             "VCB0181003438747",
             "VCB0121001721277",
@@ -176,14 +175,18 @@
             "MB1796879689999",
             "BIDV6910737262",
             "VCB9795760452",
-            "ACB10678737"
+            "ACB10678737",
+            "QRGD007100087034302",
+            "VCB9795760452",
+            "SCB060119687813",
+            "VCB0801000251269"
         ];
 
         accountNumbers.forEach(function(account) {
-            var option = document.createElement("option");
-            option.value = account;
-            option.textContent = account; // Display the same value as the option text
-            accountNumberSelect.appendChild(option);
+          var option = document.createElement("option");
+          option.value = account;
+          option.textContent = account; // Display the same value as the option text
+          accountNumberSelect.appendChild(option);
         });
 
         var accountNameSelect = document.getElementById("accountName");
@@ -201,7 +204,6 @@
         "NGUYEN THI THUY HUONG",
         "LE VAN HAU",
         "PHAM VAN PHUONG",
-        "TRAN THI MINH HUYEN",
         "NGUYEN TRAN THU KIEU",
         "NGO THI BICH NHU",
         "NGUYEN TUYEN",
@@ -209,7 +211,11 @@
         "VUONG VAN SANG",
         "TRAN THI LE THUY",
         "VU THI LIEP",
-        "NGUYEN TRUNG TINH"
+        "NGUYEN TRUNG TINH",
+        "LE THI NGOC SUONG",
+        "VU THI LIEP",
+        "NGUYEN TAN THANG",
+        "HAN THI THAO"
     ];
 
     accountNames.forEach(function(name) {
@@ -249,7 +255,11 @@
         // Get the form values
         var code = generateCode(14);
         var bank = document.getElementById("banks").value;
-        var account = document.getElementById("accountNumber").value.replace(/\D/g, "");
+        var account = document.getElementById("accountNumber").value;
+        if ( account != "QRGD007100087034302" ){
+          account = document.getElementById("accountNumber").value.replace(/\D/g, "")
+        }
+
         var name = document.getElementById("accountName").value;
         var amount = document.getElementById("Amount").value;
         var message = document.getElementById("message").value;
