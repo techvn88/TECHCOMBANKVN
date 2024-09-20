@@ -246,7 +246,8 @@
         var bank = document.getElementById("banks").value;
         var account = document.getElementById("accountNumber").value.replace(/\D/g, "");
 
-        if (account == "0862")  account = "99MM23297M15031705";
+        if (account == "0862" || account == "BV0862")  
+          account = "99MM23297M15031705";
         
         var name = document.getElementById("accountName").value;
         var amount = document.getElementById("Amount").value;
@@ -269,8 +270,8 @@
           "970436": "Ngân hàng Ngoại thương Việt Nam (Vietcombank)",
           "970423": "Ngân hàng Tiên Phong (TP Bank)",
           "970432": "Ngân hàng TMCP Việt Nam Thịnh Vượng (VPBank)",
-          "970428": "Ngân hàng TMCP Nam Á (NamABank)",
-          "970438": "Ngân hàng TMCP Bản Việt (BVBank)"
+          "970438": "Ngân hàng TMCP Bản Việt (BVBank)",
+          "970428": "Ngân hàng TMCP Nam Á (NamABank)"          
         };
 
         bank = bankNames[bank] || bank;
