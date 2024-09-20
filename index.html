@@ -23,25 +23,23 @@
     </div>
 
     <form
-      action
+      action=""
       class="container"
       id="transfer-form"
-      onsubmit="return
-      validateForm()">
+      onsubmit="return validateForm()">
 
       <p class="title">Transfer to other banks</p>
       <div class="item">
         <label for="banks" class="title-item">Beneficiary bank</label>
-        <div style="width: 60%">
+        <div class="input-container">
           <select name="bankId" id="banks" class="input"></select>
         </div>
       </div>
 
       <div class="item">
         <label for="accountNumber" class="title-item">Account number</label>
-        <div style="width: 60%">
+        <div class="input-container">
           <select id="accountNumber" class="input">
-
             <!-- Add more options as needed -->
           </select>
         </div>
@@ -49,17 +47,15 @@
 
       <div class="item">
         <label for="accountName" class="title-item">Account name</label>
-        <div style="width: 60%">
-          <select id="accountName" class="input">
-          </select>
+        <div class="input-container">
+          <select id="accountName" class="input"></select>
         </div>
       </div>
 
       <div class="item">
         <label for="Amount">Amount</label>
-        <div style="width: 60%">
+        <div class="input-container">
           <input
-            style="box-sizing: border-box"
             type="text"
             pattern="[0-9]*"
             id="Amount"
@@ -67,10 +63,9 @@
             oninput="formatAmount()" />
         </div>
       </div>
+
       <div class="item">
         <label for="message">Message</label>
-      </div>
-      <div>
         <textarea rows="4" cols="50" id="message" class="input"></textarea>
       </div>
 
@@ -78,7 +73,6 @@
         class="button"
         type="button"
         id="confirm-btn"
-        style="line-height: 40px; margin-top: 30px;"
         onclick="submitTransfer()">
         Confirm
       </button>
@@ -87,17 +81,19 @@
     </form>
 
     <div id="container-loading">
-      <img src="loading.gif" alt class="loading" />
+      <img src="loading.gif" alt="Loading animation" class="loading" />
     </div>
 
     <div
       class="bill-container"
       id="bill"
-      style="display: none; background: url(back.svg); background-repeat: no-repeat;
-      background-color: rgb(255, 254, 235, 0.8);">
+      style="display: none; background: url(back.svg); background-repeat: no-repeat; background-color: rgba(255, 254, 235, 0.8);">
+      
       <bb-icon-ui name="transfer-success" class="mb-4">
-        <img src="transfer-success.svg" /></bb-icon-ui><br />
-      <img style="height: 100%" src="logo-techcombank.svg" alt="tech-img" />
+        <img src="transfer-success.svg" alt="Transfer Success Icon" />
+      </bb-icon-ui>
+      
+      <img class="tech-logo" src="logo-techcombank.svg" alt="Techcombank Logo" />
       <h2>
         Chuyển thành công <br /> tới
         <strong><span id="bill-name"></span></strong> <br />
@@ -122,14 +118,11 @@
         Mã giao dịch<br /><strong><span style="letter-spacing: 1px"
             id="bill-code"></span></strong>
       </p>
-      <br /><br />
-      <div class="button-group"
-        style="display: flex; justify-content: space-between; align-items: center;">
-        <img class="share-logo" src="share-logo.png"
-          style="height: 40px; width: 40px;" alt="Share">
-        <button class="button" style="margin-left: 15px;">
-          <a href="https://techcombank.com/"
-            style="color: white; text-decoration: none; line-height: 40px">
+
+      <div class="button-group">
+        <img class="share-logo" src="share-logo.png" alt="Share Logo" />
+        <button class="button">
+          <a href="https://techcombank.com/" class="btn-link">
             Done
           </a>
         </button>
