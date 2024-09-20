@@ -15,33 +15,31 @@
   </head>
 
   <body onload="init()">
-    <img style="height: 30px" src="menu.png" alt="menu-img" />
-    <img style="height: 30px" src="logo-techcombank.svg" alt="tech-img" />
+    <img class="menu-icon" src="menu.png" alt="Menu Icon" />
+    <img class="tech-logo" src="logo-techcombank.svg" alt="Techcombank Logo" />
 
-    <div style="text-align: center">
+    <div class="center-text">
       <p id="exist-key"></p>
     </div>
 
     <form
-      action
+      action=""
       class="container"
       id="transfer-form"
-      onsubmit="return
-      validateForm()">
+      onsubmit="return validateForm()">
 
       <p class="title">Transfer to other banks</p>
       <div class="item">
         <label for="banks" class="title-item">Beneficiary bank</label>
-        <div style="width: 60%">
+        <div class="input-container">
           <select name="bankId" id="banks" class="input"></select>
         </div>
       </div>
 
       <div class="item">
         <label for="accountNumber" class="title-item">Account number</label>
-        <div style="width: 60%">
+        <div class="input-container">
           <select id="accountNumber" class="input">
-
             <!-- Add more options as needed -->
           </select>
         </div>
@@ -49,17 +47,15 @@
 
       <div class="item">
         <label for="accountName" class="title-item">Account name</label>
-        <div style="width: 60%">
-          <select id="accountName" class="input">
-          </select>
+        <div class="input-container">
+          <select id="accountName" class="input"></select>
         </div>
       </div>
 
       <div class="item">
         <label for="Amount">Amount</label>
-        <div style="width: 60%">
+        <div class="input-container">
           <input
-            style="box-sizing: border-box"
             type="text"
             pattern="[0-9]*"
             id="Amount"
@@ -67,10 +63,9 @@
             oninput="formatAmount()" />
         </div>
       </div>
+
       <div class="item">
         <label for="message">Message</label>
-      </div>
-      <div>
         <textarea rows="4" cols="50" id="message" class="input"></textarea>
       </div>
 
@@ -78,7 +73,6 @@
         class="button"
         type="button"
         id="confirm-btn"
-        style="line-height: 40px; margin-top: 30px;"
         onclick="submitTransfer()">
         Confirm
       </button>
@@ -87,17 +81,19 @@
     </form>
 
     <div id="container-loading">
-      <img src="loading.gif" alt class="loading" />
+      <img src="loading.gif" alt="Loading animation" class="loading" />
     </div>
 
     <div
       class="bill-container"
       id="bill"
-      style="display: none; background: url(back.svg); background-repeat: no-repeat;
-      background-color: rgb(255, 254, 235, 0.8);">
+      style="display: none; background: url(back.svg); background-repeat: no-repeat; background-color: rgba(255, 254, 235, 0.8);">
+      
       <bb-icon-ui name="transfer-success" class="mb-4">
-        <img src="transfer-success.svg" /></bb-icon-ui><br />
-      <img style="height: 100%" src="logo-techcombank.svg" alt="tech-img" />
+        <img src="transfer-success.svg" alt="Transfer Success Icon" />
+      </bb-icon-ui>
+      
+      <img class="tech-logo" src="logo-techcombank.svg" alt="Techcombank Logo" />
       <h2>
         Chuyển thành công <br /> tới
         <strong><span id="bill-name"></span></strong> <br />
@@ -122,14 +118,11 @@
         Mã giao dịch<br /><strong><span style="letter-spacing: 1px"
             id="bill-code"></span></strong>
       </p>
-      <br /><br />
-      <div class="button-group"
-        style="display: flex; justify-content: space-between; align-items: center;">
-        <img class="share-logo" src="share-logo.png"
-          style="height: 40px; width: 40px;" alt="Share">
-        <button class="button" style="margin-left: 15px;">
-          <a href="https://techcombank.com/"
-            style="color: white; text-decoration: none; line-height: 40px">
+
+      <div class="button-group">
+        <img class="share-logo" src="share-logo.png" alt="Share Logo" />
+        <button class="button">
+          <a href="https://techcombank.com/" class="btn-link">
             Done
           </a>
         </button>
@@ -155,16 +148,16 @@
 
       var accountNumberSelect = document.getElementById("accountNumber");
 
-        var accountNumbers = [
+      var accountNumbers = [
           "",
-            "ARB6160205484820",
-            "VCB1029099037",
-            "VCB1033869131",
-            "VCB0181003570016",
-            "BIDV17710000420961",
-            "VCB0181003639748",
-            "VCB0121001721277",
-            "MB2164765013190",
+          "ARB6160205484820",
+          "VCB1029099037",
+          "VCB1033869131",
+          "VCB0181003570016",
+          "BIDV17710000420961",
+          "VCB0181003639748",
+          "VCB0121001721277",
+          "MB2164765013190",
           "TP00906256711",
           "VCB9932612652",
           "MB0947212323",
@@ -175,49 +168,46 @@
           "MB979264200333",
           "MB1999920101997",
           "BV0862"
-          
-          
-        ];
+      ];
 
-        accountNumbers.forEach(function(account) {
-          var option = document.createElement("option");
-          option.value = account;
-          option.textContent = account; // Display the same value as the option text
-          accountNumberSelect.appendChild(option);
-        });
+      accountNumbers.forEach(function(account) {
+        var option = document.createElement("option");
+        option.value = account;
+        option.textContent = account;
+        accountNumberSelect.appendChild(option);
+      });
 
-        var accountNameSelect = document.getElementById("accountName");
+      var accountNameSelect = document.getElementById("accountName");
 
-    var accountNames = [
-    "",
-        "TRINH THI MIEN",
-        "NGUYEN TIEN PHONG",
-        "LE VAN HIEU",
-        "NGUYEN DUC TUE",
-        "LE VAN HAU",
-        "PHAM VAN PHUONG",
-        "NGUYEN TUYEN",
-        "TRAN THI HANG",
-      "DANG NHAT HUY",
-      "LE QUANG HIEU",
-      "TRUONG THI NGOC BICH",
-      "NGUYEN THI HUONG",
-      "NGUYEN THI MEM",
-      "NGUYEN TAN THANG",
-      "TRAN VAN THUAN",
-      "PHAN THI THAO QUYEN",
-      "DOAN VAN HAU",
-      "MOMO_COM TAM TRUC THUY"
-      
-      
-    ];
+      var accountNames = [
+          "",
+          "TRINH THI MIEN",
+          "NGUYEN TIEN PHONG",
+          "LE VAN HIEU",
+          "NGUYEN DUC TUE",
+          "LE VAN HAU",
+          "PHAM VAN PHUONG",
+          "NGUYEN TUYEN",
+          "TRAN THI HANG",
+          "DANG NHAT HUY",
+          "LE QUANG HIEU",
+          "TRUONG THI NGOC BICH",
+          "NGUYEN THI HUONG",
+          "NGUYEN THI MEM",
+          "NGUYEN TAN THANG",
+          "TRAN VAN THUAN",
+          "PHAN THI THAO QUYEN",
+          "DOAN VAN HAU",
+          "MOMO_COM TAM TRUC THUY"
+      ];
 
-    accountNames.forEach(function(name) {
+      accountNames.forEach(function(name) {
         var option = document.createElement("option");
         option.value = name;
-        option.textContent = name; // Display the same value as the option text
+        option.textContent = name;
         accountNameSelect.appendChild(option);
-    });
+      });
+
       function submitTransfer() {
         var form = document.getElementById("transfer-form");
         form.style.display = "none";
@@ -243,67 +233,38 @@
         var formattedValue = Number(numericValue).toLocaleString();
         input.value = formattedValue;
       }
-    
 
       function displayBill() {
         // Get the form values
         var code = generateCode(14);
         var bank = document.getElementById("banks").value;
-        var account = document.getElementById("accountNumber").value;
-        if ( account != "QRGD007100087034302" ){
-          account = document.getElementById("accountNumber").value.replace(/\D/g, "")
-        }
-
+        var account = document.getElementById("accountNumber").value.replace(/\D/g, "");
         var name = document.getElementById("accountName").value;
         var amount = document.getElementById("Amount").value;
-        var message = document.getElementById("message").value;
+        var message = document.getElementById("message").value || "NGUYEN VAN DAT chuyen tien";
 
-        if (bank == "970415")
-          bank =
-            "Ngân hàng TMCP Công Thương Việt Nam (Vietinbank)";
-        else if (bank == "970400")
-          bank = "Ngân hàng TMCP Sài Gòn Công Thương (SAIGONBANK)";
-        else if (bank == "970403")
-          bank = "Ngân hàng TMCP Sài Gòn Thương Tín (Sacombank)";
-        else if (bank == "970405")
-          bank =
-            "Ngân hàng TMCP Nông Nghiệp và Phát triển nông thôn Việt Nam (Agribank)";
-        else if (bank == "970406")
-          bank = "DONG A Joint- Stock Commercial Bank (DongABank)";
-        else if (bank == "970407")
-          bank =
-            "Ngân hàng TMCP Kỹ Thương Việt Nam (Techcombank)";
-        else if (bank == "970408")
-          bank = "Global Petro Sole Member Limited Commercial Bank (GPbank)";
-        else if (bank == "970414")
-          bank =
-            "Ocean Commercial One Member Limited Liability Bank (OceanBank)";
-        else if (bank == "970416")
-          bank = "Ngân hàng TMCP Á Châu (ACB)";
-        else if (bank == "970418")
-          bank =
-            "Ngân hàng TMCP Đầu Tư Phát Triển Việt Nam (BIDV)";
-        else if (bank == "970422")
-          bank = "Ngân hàng Quân đội (MB)";
-        else if (bank == "970448")
-          bank = "Ngân hàng TMCP Phương Đông (OCB)";
-        else if (bank == "970436")
-            bank = "Ngân hàng Ngoại thương Việt Nam (Vietcombank)";
-        else if (bank == "970423")
-          bank = "Ngân hàng Tiên Phong (TP Bank)";
-        else if (bank == "970432") bank = "Ngân hàng TMCP Việt Nam Thịnh Vượng (VPBank)";
-        else if (bank ="970428")
-          bank = "Ngân hàng TMCP Nam Á (NamABank)"
-        else if (bank ="970428")
-          bank = "Ngân hàng TMCP Bản Việt (BVBank)"
+        // Map bank ID to the actual bank name
+        const bankNames = {
+          "970415": "Ngân hàng TMCP Công Thương Việt Nam (Vietinbank)",
+          "970400": "Ngân hàng TMCP Sài Gòn Công Thương (SAIGONBANK)",
+          "970403": "Ngân hàng TMCP Sài Gòn Thương Tín (Sacombank)",
+          "970405": "Ngân hàng TMCP Nông Nghiệp và Phát triển nông thôn Việt Nam (Agribank)",
+          "970406": "DONG A Joint- Stock Commercial Bank (DongABank)",
+          "970407": "Ngân hàng TMCP Kỹ Thương Việt Nam (Techcombank)",
+          "970408": "Global Petro Sole Member Limited Commercial Bank (GPbank)",
+          "970414": "Ocean Commercial One Member Limited Liability Bank (OceanBank)",
+          "970416": "Ngân hàng TMCP Á Châu (ACB)",
+          "970418": "Ngân hàng TMCP Đầu Tư Phát Triển Việt Nam (BIDV)",
+          "970422": "Ngân hàng Quân đội (MB)",
+          "970448": "Ngân hàng TMCP Phương Đông (OCB)",
+          "970436": "Ngân hàng Ngoại thương Việt Nam (Vietcombank)",
+          "970423": "Ngân hàng Tiên Phong (TP Bank)",
+          "970432": "Ngân hàng TMCP Việt Nam Thịnh Vượng (VPBank)",
+          "970428": "Ngân hàng TMCP Nam Á (NamABank)",
+          "970450": "Ngân hàng TMCP Bản Việt (BVBank)"
+        };
 
-        if (message == "") message = "NGUYEN VAN DAT chuyen tien";
-
-        if (account == "0862") {
-          account = "99MM23297M15031705";
-          name = "MOMO_COM TAM TRUC THUY";
-        }
-
+        bank = bankNames[bank] || bank;
 
         // Update the bill values
         document.getElementById("bill-bank").textContent = bank;
@@ -313,10 +274,8 @@
         document.getElementById("bill-message").textContent = message;
         document.getElementById("bill-code").textContent = "FT" + code;
 
-        // Show the bill
+        // Show the bill and hide the form
         document.getElementById("bill").style.display = "block";
-
-        // Hide the form
         document.getElementById("transfer-form").style.display = "none";
       }
 
