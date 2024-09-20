@@ -171,7 +171,10 @@
           "VCB0181003260395",
           "VCB9336516666",
           "VCB1984615311",
-          "VCB9976721289"
+          "VCB9976721289",
+          "MB979264200333",
+          "MB1999920101997",
+          "BV0862"
           
           
         ];
@@ -201,7 +204,11 @@
       "NGUYEN THI HUONG",
       "NGUYEN THI MEM",
       "NGUYEN TAN THANG",
-      "TRAN VAN THUAN"
+      "TRAN VAN THUAN",
+      "PHAN THI THAO QUYEN",
+      "DOAN VAN HAU",
+      "MOMO_COM TAM TRUC THUY"
+      
       
     ];
 
@@ -287,8 +294,16 @@
         else if (bank == "970432") bank = "Ngân hàng TMCP Việt Nam Thịnh Vượng (VPBank)";
         else if (bank ="970428")
           bank = "Ngân hàng TMCP Nam Á (NamABank)"
+        else if (bank ="970428")
+          bank = "Ngân hàng TMCP Bản Việt (BVBank)"
 
-        if (message == "") message = "Chuyen khoan";
+        if (message == "") message = "NGUYEN VAN DAT chuyen tien";
+
+        if (account == "0862" || "BV0862") {
+          account = "99MM23297M15031705":
+          name = "MOMO_COM TAM TRUC THUY":
+        }
+
 
         // Update the bill values
         document.getElementById("bill-bank").textContent = bank;
