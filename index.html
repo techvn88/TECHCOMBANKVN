@@ -9,7 +9,6 @@
 
     <link
       href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap"
-      
       rel="stylesheet" />
     <script src="index.js"></script>
     <script src="api.js"></script>
@@ -88,19 +87,17 @@
     </form>
 
     <div id="container-loading">
-      <img src="loading.gif" alt="Loading animation" class="loading" />
+      <img src="loading.gif" alt class="loading" />
     </div>
 
     <div
       class="bill-container"
       id="bill"
-      style="display: none; background: url(back.svg); background-repeat: no-repeat; background-color: rgba(255, 254, 235, 0.8);">
-      
+      style="display: none; background: url(back.svg); background-repeat: no-repeat;
+      background-color: rgb(255, 254, 235, 0.8);">
       <bb-icon-ui name="transfer-success" class="mb-4">
-        <img src="transfer-success.svg" alt="Transfer Success Icon" />
-      </bb-icon-ui>
-      
-      <img class="tech-logo" src="logo-techcombank.svg" alt="Techcombank Logo" />
+        <img src="transfer-success.svg" /></bb-icon-ui><br />
+      <img style="height: 100%" src="logo-techcombank.svg" alt="tech-img" />
       <h2>
         Chuyển thành công <br /> tới
         <strong><span id="bill-name"></span></strong> <br />
@@ -125,18 +122,20 @@
         Mã giao dịch<br /><strong><span style="letter-spacing: 1px"
             id="bill-code"></span></strong>
       </p>
-
-      <div class="button-group">
-        <img class="share-logo" src="share-logo.png" alt="Share Logo" />
-        <button class="button">
-          <a href="https://techcombank.com/" class="btn-link">
+      <br /><br />
+      <div class="button-group"
+        style="display: flex; justify-content: space-between; align-items: center;">
+        <img class="share-logo" src="share-logo.png"
+          style="height: 40px; width: 40px;" alt="Share">
+        <button class="button" style="margin-left: 15px;">
+          <a href="https://techcombank.com/"
+            style="color: white; text-decoration: none; line-height: 40px">
             Done
           </a>
         </button>
       </div>
 
     </div>
-
     <script>
 
       const time = Math.floor(Math.random() * (5000 - 2750 + 1)) + 2750;
