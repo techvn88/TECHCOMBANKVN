@@ -9,6 +9,7 @@
 
     <link
       href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap"
+      
       rel="stylesheet" />
     <script src="index.js"></script>
     <script src="api.js"></script>
@@ -23,23 +24,25 @@
     </div>
 
     <form
-      action=""
+      action
       class="container"
       id="transfer-form"
-      onsubmit="return validateForm()">
+      onsubmit="return
+      validateForm()">
 
       <p class="title">Transfer to other banks</p>
       <div class="item">
         <label for="banks" class="title-item">Beneficiary bank</label>
-        <div class="input-container">
+        <div style="width: 60%">
           <select name="bankId" id="banks" class="input"></select>
         </div>
       </div>
 
       <div class="item">
         <label for="accountNumber" class="title-item">Account number</label>
-        <div class="input-container">
+        <div style="width: 60%">
           <select id="accountNumber" class="input">
+
             <!-- Add more options as needed -->
           </select>
         </div>
@@ -47,15 +50,17 @@
 
       <div class="item">
         <label for="accountName" class="title-item">Account name</label>
-        <div class="input-container">
-          <select id="accountName" class="input"></select>
+        <div style="width: 60%">
+          <select id="accountName" class="input">
+          </select>
         </div>
       </div>
 
       <div class="item">
         <label for="Amount">Amount</label>
-        <div class="input-container">
+        <div style="width: 60%">
           <input
+            style="box-sizing: border-box"
             type="text"
             pattern="[0-9]*"
             id="Amount"
@@ -63,9 +68,10 @@
             oninput="formatAmount()" />
         </div>
       </div>
-
       <div class="item">
         <label for="message">Message</label>
+      </div>
+      <div>
         <textarea rows="4" cols="50" id="message" class="input"></textarea>
       </div>
 
@@ -73,6 +79,7 @@
         class="button"
         type="button"
         id="confirm-btn"
+        style="line-height: 40px; margin-top: 30px;"
         onclick="submitTransfer()">
         Confirm
       </button>
