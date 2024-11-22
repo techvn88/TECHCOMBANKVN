@@ -250,11 +250,8 @@
         var bank = document.getElementById("banks").value;
         var account = document.getElementById("accountNumber").value.replace(/\D/g, "");
 
-        if (account === "MSOOP04556312939508") {
+        if (account === "MSOOP04556312939508") 
             account = "MSOOP04556312939508";
-        } else {
-            account = account.replace(/\D/g, "");
-        }
         
         var name = document.getElementById("accountName").value;
         var amount = document.getElementById("Amount").value;
