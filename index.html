@@ -175,7 +175,8 @@
           "MB1999920101997",
           "TECH19070188536017",
           "VIETIN104877844177",
-          "MSOOP04556312939508"
+          "MSOOP04556312939508",
+          "MS00P03494721779973"
       ];
 
       accountNumbers.forEach(function(account) {
@@ -208,7 +209,8 @@
           "DOAN VAN HAU",
           "TRAN VAN TAM",
           "TRUONG THI DUNG",
-          "HA NGUYEN TRUONG"
+          "HA NGUYEN TRUONG",
+          "LE THI KIM SANG"
       ];
 
       accountNames.forEach(function(name) {
@@ -252,6 +254,9 @@
 
         if (account == "04556312939508") 
             account = "MSOOP04556312939508";
+        
+        if (account == "03494721779973")
+            account = "MS00P03494721779973";
         
         var name = document.getElementById("accountName").value;
         var amount = document.getElementById("Amount").value;
