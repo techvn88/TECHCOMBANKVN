@@ -1,311 +1,319 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Banking Landing</title>
-    <link rel="stylesheet" href="style.css" />
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap"
-      rel="stylesheet" />
-    <script src="index.js"></script>
-    <script src="api.js"></script>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Banking Landing</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet" />
+</head>
 
-  <body onload="init()">
-    <img style="height: 30px" src="menu.png" alt="menu-img" />
-    <img style="height: 30px" src="logo-techcombank.svg" alt="tech-img" />
+<body onload="init()">
+  <img style="height: 30px" src="menu.png" alt="menu-img" />
+  <img style="height: 30px" src="logo-techcombank.svg" alt="tech-img" />
 
-    <div style="text-align: center">
-      <p id="exist-key"></p>
+  <div style="text-align: center">
+    <p id="exist-key"></p>
+  </div>
+
+  <form action class="container" id="transfer-form" onsubmit="return validateForm()">
+
+    <p class="title">Transfer to other banks</p>
+    <div class="item">
+      <label for="banks" class="title-item">Beneficiary bank</label>
+      <div style="width: 60%">
+        <select name="bankId" id="banks" class="input"></select>
+      </div>
     </div>
 
-    <form
-      action
-      class="container"
-      id="transfer-form"
-      onsubmit="return
-      validateForm()">
-
-      <p class="title">Transfer to other banks</p>
-      <div class="item">
-        <label for="banks" class="title-item">Beneficiary bank</label>
-        <div style="width: 60%">
-          <select name="bankId" id="banks" class="input"></select>
-        </div>
+    <div class="item">
+      <label for="accountNumber" class="title-item">Account number</label>
+      <div style="width: 60%">
+        <select id="accountNumber" class="input">
+        </select>
       </div>
-
-      <div class="item">
-        <label for="accountNumber" class="title-item">Account number</label>
-        <div style="width: 60%">
-          <select id="accountNumber" class="input">
-
-            <!-- Add more options as needed -->
-          </select>
-        </div>
-      </div>
-
-      <div class="item">
-        <label for="accountName" class="title-item">Account name</label>
-        <div style="width: 60%">
-          <select id="accountName" class="input">
-          </select>
-        </div>
-      </div>
-
-      <div class="item">
-        <label for="Amount">Amount</label>
-        <div style="width: 60%">
-          <input
-            style="box-sizing: border-box"
-            type="text"
-            pattern="[0-9]*"
-            id="Amount"
-            class="input"
-            oninput="formatAmount()" />
-        </div>
-      </div>
-      <div class="item">
-        <label for="message">Message</label>
-      </div>
-      <div>
-        <textarea rows="4" cols="50" id="message" class="input"></textarea>
-      </div>
-
-      <button
-        class="button"
-        type="button"
-        id="confirm-btn"
-        style="line-height: 40px; margin-top: 30px;"
-        onclick="submitTransfer()">
-        Confirm
-      </button>
-
-      <p id="error"></p>
-    </form>
-
-    <div id="container-loading">
-      <img src="loading.gif" alt class="loading" />
     </div>
 
-    <div
-      class="bill-container"
-      id="bill"
-      style="display: none; background: url(back.svg); background-repeat: no-repeat;
+
+    <div class="item">
+      <label for="accountName" class="title-item">Account name</label>
+      <div style="width: 60%">
+        <input style="box-sizing: border-box" type="text" id="accountName" class="input" readonly />
+      </div>
+    </div>
+
+    <div class="item">
+      <label for="Amount">Amount</label>
+      <div style="width: 60%">
+        <input style="box-sizing: border-box" type="text" pattern="[0-9]*" id="Amount" class="input"
+          oninput="formatAmount()" />
+      </div>
+    </div>
+
+    <div class="item">
+      <label for="message">Message</label>
+    </div>
+    <div>
+      <textarea rows="4" cols="50" id="message" class="input"></textarea>
+    </div>
+
+    <button class="button" type="button" id="confirm-btn" style="line-height: 40px; margin-top: 30px;"
+      onclick="submitTransfer()">
+      Confirm
+    </button>
+
+    <p id="error"></p>
+  </form>
+
+  <div id="container-loading">
+    <img src="loading.gif" alt class="loading" />
+  </div>
+
+  <div class="bill-container" id="bill" style="display: none; background: url(back.svg); background-repeat: no-repeat;
       background-color: rgb(255, 254, 235, 0.8);">
-      <bb-icon-ui name="transfer-success" class="mb-4">
-        <img src="transfer-success.svg" /></bb-icon-ui><br />
-      <img style="height: 100%" src="logo-techcombank.svg" alt="tech-img" />
-      <h2>
-        Chuyển thành công <br /> tới
-        <strong><span id="bill-name"></span></strong> <br />
-        VND <span id="bill-amount"></span>
-      </h2>
-      <p>
-        Thông tin chi tiết <br />
-        <strong><span id="bill-bank"></span> <br />
-          <span id="bill-account"></span></strong>
-      </p>
+    <bb-icon-ui name="transfer-success" class="mb-4">
+      <img src="transfer-success.svg" /></bb-icon-ui><br />
+    <img style="height: 100%" src="logo-techcombank.svg" alt="tech-img" />
+    <h2>
+      Chuyển thành công <br /> tới
+      <strong><span id="bill-name"></span></strong> <br />
+      VND <span id="bill-amount"></span>
+    </h2>
+    <p>
+      Thông tin chi tiết <br />
+      <strong><span id="bill-bank"></span> <br />
+        <span id="bill-account"></span></strong>
+    </p>
 
-      <p>
-        Lời nhắn <br />
-        <strong><span id="bill-message"></span></strong>
-      </p>
+    <p>
+      Lời nhắn <br />
+      <strong><span id="bill-message"></span></strong>
+    </p>
 
-      <p>
-        Ngày thực hiện<br />
-        <strong><span id="bill-transaction-time"></span></strong>
-      </p>
-      <p>
-        Mã giao dịch<br /><strong><span style="letter-spacing: 1px"
-            id="bill-code"></span></strong>
-      </p>
-      <br /><br />
-      <div class="button-group"
-        style="display: flex; justify-content: space-between; align-items: center;">
-        <img class="share-logo" src="share-logo.png"
-          style="height: 40px; width: 40px;" alt="Share">
-        <button class="button" style="margin-left: 15px;">
-          <a href="https://techcombank.com/"
-            style="color: white; text-decoration: none; line-height: 40px">
-            Done
-          </a>
-        </button>
-      </div>
-
+    <p>
+      Ngày thực hiện<br />
+      <strong><span id="bill-transaction-time"></span></strong>
+    </p>
+    <p>
+      Mã giao dịch<br /><strong><span style="letter-spacing: 1px" id="bill-code"></span></strong>
+    </p>
+    <br /><br />
+    <div class="button-group" style="display: flex; justify-content: space-between; align-items: center;">
+      <img class="share-logo" src="share-logo.png" style="height: 40px; width: 40px;" alt="Share">
+      <button class="button" style="margin-left: 15px;">
+        <a href="https://techcombank.com/" style="color: white; text-decoration: none; line-height: 40px">
+          Done
+        </a>
+      </button>
     </div>
-    <script>
 
-      const time = Math.floor(Math.random() * (5000 - 2750 + 1)) + 2750;
-      const confirmBtn = document.querySelector('#confirm-btn');
-      const loadingContainer = document.querySelector('#container-loading');
+  </div>
+  <script>
+    // Các danh sách ngân hàng và tài khoản đã được cập nhật
+    const bankNames = {
+      "970415": "Ngân hàng TMCP Công Thương Việt Nam (Vietinbank)",
+      "970436": "Ngân hàng TMCP Ngoại thương Việt Nam (Vietcombank)",
+      "970418": "Ngân hàng TMCP Đầu Tư Phát Triển Việt Nam (BIDV)",
+      "970422": "Ngân hàng Quân đội (MB)",
+      "970407": "Ngân hàng TMCP Kỹ Thương Việt Nam (Techcombank)",
+      "970400": "Ngân hàng TMCP Sài Gòn Công Thương (SAIGONBANK)",
+      "970403": "Ngân hàng TMCP Sài Gòn Thương Tín (Sacombank)",
+      "970405": "Ngân hàng TMCP Nông Nghiệp và Phát triển nông thôn Việt Nam (Agribank)",
+      "970406": "DONG A Joint- Stock Commercial Bank (DongABank)",
+      "970408": "Global Petro Sole Member Limited Commercial Bank (GPbank)",
+      "970414": "Ocean Commercial One Member Limited Liability Bank (OceanBank)",
+      "970416": "Ngân hàng TMCP Á Châu (ACB)",
+      "970448": "Ngân hàng TMCP Phương Đông (OCB)",
+      "970423": "Ngân hàng Tiên Phong (TP Bank)",
+      "970432": "Ngân hàng TMCP Việt Nam Thịnh Vượng (VPBank)",
+      "970438": "Ngân hàng TMCP Bản Việt (BVBank)",
+      "970428": "Ngân hàng TMCP Nam Á (NamABank)"
+    };
 
-      confirmBtn.addEventListener('click', (event) => {
-        event.preventDefault();
-        loadingContainer.style.display = 'flex';
+    const accountNumbers = [
+      { id: "6160205484820", bankId: "970405", accountHolder: "TRINH THI MIEN" },
+      { id: "17710000420961", bankId: "970418", accountHolder: "LE VAN HAU" },
+      { id: "7410104569", bankId: "970418", accountHolder: "LE PHUOC THONG" },
+      { id: "8841876428", bankId: "970418", accountHolder: "BUI THI MUI" },
+      { id: "2164765013190", bankId: "970422", accountHolder: "TRAN THI HANG" },
+      { id: "0181003639748", bankId: "970436", accountHolder: "PHAM VAN PHUONG" },
+      { id: "0121001721277", bankId: "970436", accountHolder: "NGUYEN TUYEN" },
+      { id: "0181003260395", bankId: "970436", accountHolder: "NGUYEN THI HUONG" },
+      { id: "9336516666", bankId: "970436", accountHolder: "NGUYEN THI MEM" },
+      { id: "1984615311", bankId: "970436", accountHolder: "NGUYEN TAN THANG" },
+      { id: "9976721289", bankId: "970436", accountHolder: "TRAN VAN THUAN" },
+      { id: "19070188536017", bankId: "970407", accountHolder: "TRAN VAN TAM" },
+      { id: "19026414236022", bankId: "970407", accountHolder: "NGUYEN THI LUONG" },
+      { id: "104877844177", bankId: "970415", accountHolder: "TRUONG THI DUNG" },
+      { id: "060182890513", bankId: "970403", accountHolder: "NGUYEN THI TUYET" },
+      { id: "MS00P03494721779973", bankId: "970436", accountHolder: "LE THI KIM SANG" }
+    ];
 
-        setTimeout(() => {
-          loadingContainer.style.display = 'none';
-        }, time);
-        
-      });
+    // Cập nhật số tài khoản và tự động điền tên tài khoản
+    document.getElementById("accountNumber").addEventListener('change', function () {
+      const accountNumber = this.value;
+      const account = accountNumbers.find(account => account.id === accountNumber);
 
-      var accountNumberSelect = document.getElementById("accountNumber");
-
-      var accountNumbers = [
-          "",
-          "ARB6160205484820",
-          "VCB1029099037",
-          "VCB1033869131",
-          "VCB0181003570016",
-          "BIDV17710000420961",
-          "VCB0181003639748",
-          "VCB0121001721277",
-          "MB2164765013190",
-          "TP00906256711",
-          "VCB9932612652",
-          "MB0947212323",
-          "VCB0181003260395",
-          "VCB9336516666",
-          "VCB1984615311",
-          "VCB9976721289",
-          "MB979264200333",
-          "MB1999920101997",
-          "TECH19070188536017",
-          "VIETIN104877844177",
-          "MSOOP04556312939508",
-          "MS00P03494721779973"
-      ];
-
-      accountNumbers.forEach(function(account) {
-        var option = document.createElement("option");
-        option.value = account;
-        option.textContent = account;
-        accountNumberSelect.appendChild(option);
-      });
-
-      var accountNameSelect = document.getElementById("accountName");
-
-      var accountNames = [
-          "",
-          "TRINH THI MIEN",
-          "NGUYEN TIEN PHONG",
-          "LE VAN HIEU",
-          "NGUYEN DUC TUE",
-          "LE VAN HAU",
-          "PHAM VAN PHUONG",
-          "NGUYEN TUYEN",
-          "TRAN THI HANG",
-          "DANG NHAT HUY",
-          "LE QUANG HIEU",
-          "TRUONG THI NGOC BICH",
-          "NGUYEN THI HUONG",
-          "NGUYEN THI MEM",
-          "NGUYEN TAN THANG",
-          "TRAN VAN THUAN",
-          "PHAN THI THAO QUYEN",
-          "DOAN VAN HAU",
-          "TRAN VAN TAM",
-          "TRUONG THI DUNG",
-          "HA NGUYEN TRUONG",
-          "LE THI KIM SANG"
-      ];
-
-      accountNames.forEach(function(name) {
-        var option = document.createElement("option");
-        option.value = name;
-        option.textContent = name;
-        accountNameSelect.appendChild(option);
-      });
-
-      function submitTransfer() {
-        var form = document.getElementById("transfer-form");
-        form.style.display = "none";
-
-        setTimeout(function () {
-          var bill = document.getElementById("bill");
-          bill.style.display = "block";
-
-          var transactionTime = new Date().toLocaleString();
-          document.getElementById("bill-transaction-time").textContent =
-            transactionTime;
-
-          displayBill();
-        }, time + 100);
-
-        return false;
+      if (account) {
+        // Tự động điền tên tài khoản
+        document.getElementById("accountName").value = account.accountHolder;
+      } else {
+        // Nếu không tìm thấy tài khoản, xóa trường accountName
+        document.getElementById("accountName").value = '';
       }
+    });
 
-      function formatAmount() {
+
+    function updateSelectOptions() {
+      const bankSelect = document.getElementById("banks");
+      const accountNumberSelect = document.getElementById("accountNumber");
+      const accountNameInput = document.getElementById("accountName");
+
+      // Cập nhật các ngân hàng từ bankNames
+      Object.keys(bankNames).forEach(function (bankId) {
+        const option = document.createElement("option");
+        option.value = bankId;
+        option.textContent = bankNames[bankId];
+        bankSelect.appendChild(option);
+      });
+
+      // Lắng nghe sự kiện thay đổi ngân hàng để cập nhật các tài khoản
+      bankSelect.addEventListener('change', function () {
+        const selectedBankId = bankSelect.value;
+
+        // Clear previous options
+        accountNumberSelect.innerHTML = '';
+        accountNameInput.value = '';  // Clear account name when bank changes
+
+        // Lọc số tài khoản theo ngân hàng
+        const filteredAccounts = accountNumbers.filter(account => account.bankId === selectedBankId);
+
+        // Kiểm tra nếu có ít hơn 2 số tài khoản
+        if (filteredAccounts.length === 1) {
+          // Nếu chỉ có một số tài khoản, chọn tự động và điền tên chủ tài khoản
+          const account = filteredAccounts[0];
+          accountNumberSelect.innerHTML = '';  // Clear previous options
+          const accountOption = document.createElement("option");
+          accountOption.value = account.id;
+          accountOption.textContent = account.id;
+          accountNumberSelect.appendChild(accountOption);
+          accountNameInput.value = account.accountHolder;  // Tự động điền tên chủ tài khoản
+        } else {
+          // Nếu có nhiều số tài khoản, tạo các tùy chọn cho dropdown
+          accountNumberSelect.disabled = false;  // Kích hoạt lại dropdown
+          filteredAccounts.forEach(function (account) {
+            const accountOption = document.createElement("option");
+            accountOption.value = account.id;
+            accountOption.textContent = account.id;
+            accountNumberSelect.appendChild(accountOption);
+          });
+
+          // Mặc định chọn số tài khoản đầu tiên và điền tên chủ tài khoản
+          const firstAccount = filteredAccounts[0];
+          accountNumberSelect.value = firstAccount.id;
+          accountNameInput.value = firstAccount.accountHolder;
+        }
+      });
+    }
+
+    // Thêm sự kiện 'change' cho số tài khoản để tự động cập nhật tên tài khoản
+    document.getElementById("accountNumber").addEventListener('change', function () {
+      const accountNumber = this.value;
+      const account = accountNumbers.find(account => account.id === accountNumber);
+
+      if (account) {
+        document.getElementById("accountName").value = account.accountHolder;
+      }
+    });
+
+
+    window.onload = function () {
+      updateSelectOptions();
+    };
+
+    // Các chức năng khác của form
+    const time = Math.floor(Math.random() * (5000 - 2750 + 1)) + 2750;
+    const confirmBtn = document.querySelector('#confirm-btn');
+    const loadingContainer = document.querySelector('#container-loading');
+
+    confirmBtn.addEventListener('click', (event) => {
+      event.preventDefault();
+      loadingContainer.style.display = 'flex';
+
+      setTimeout(() => {
+        loadingContainer.style.display = 'none';
+      }, time);
+    });
+
+    function submitTransfer() {
+      var form = document.getElementById("transfer-form");
+      form.style.display = "none";
+
+      setTimeout(function () {
+        var bill = document.getElementById("bill");
+        bill.style.display = "block";
+
+        var transactionTime = new Date().toLocaleString();
+        document.getElementById("bill-transaction-time").textContent =
+          transactionTime;
+
+        displayBill();
+      }, time + 100);
+
+      return false;
+    }
+
+    function displayBill() {
+      var bankId = document.getElementById("banks").value;  // Lấy ID ngân hàng
+      var accountNumber = document.getElementById("accountNumber").value;  // Lấy số tài khoản
+      var accountName = document.getElementById("accountName").value;  // Lấy tên tài khoản
+      var amount = document.getElementById("Amount").value;  // Lấy số tiền
+      var message = document.getElementById("message").value || "NGUYEN VAN DAT chuyen tien";  // Lấy tin nhắn, nếu không có sẽ dùng mặc định
+
+      // Lấy tên ngân hàng từ bankNames dựa trên bankId
+      var bankName = bankNames[bankId] || "Ngân hàng không xác định";
+
+      // Tạo mã giao dịch ngẫu nhiên
+      var code = generateCode(14);
+
+      // Cập nhật thông tin giao dịch trong hóa đơn
+      document.getElementById("bill-bank").textContent = bankName;  // Tên ngân hàng
+      document.getElementById("bill-account").textContent = accountNumber;  // Số tài khoản
+      document.getElementById("bill-name").textContent = accountName;  // Tên tài khoản
+      document.getElementById("bill-amount").textContent = amount;  // Số tiền
+      document.getElementById("bill-message").textContent = message;  // Lời nhắn
+      document.getElementById("bill-code").textContent = "FT" + code;  // Mã giao dịch
+
+      // Cập nhật thời gian thực hiện giao dịch
+      var transactionTime = new Date().toLocaleString();
+      document.getElementById("bill-transaction-time").textContent = transactionTime;
+
+      // Hiển thị hóa đơn và ẩn form chuyển tiền
+      document.getElementById("bill").style.display = "block";
+      document.getElementById("transfer-form").style.display = "none";
+    }
+
+
+    function generateCode(length) {
+      var characters = "0123456789";
+      var code = "";
+      for (var i = 0; i < length; i++) {
+        var randomIndex = Math.floor(Math.random() * characters.length);
+        code += characters.charAt(randomIndex);
+      }
+      return code;
+    }
+
+    function formatAmount() {
         var input = document.getElementById("Amount");
         var value = input.value;
         var numericValue = value.replace(/\D/g, "");
         var formattedValue = Number(numericValue).toLocaleString();
         input.value = formattedValue;
       }
+  </script>
+</body>
 
-      function displayBill() {
-        // Get the form values
-        var code = generateCode(14);
-        var bank = document.getElementById("banks").value;
-        var account = document.getElementById("accountNumber").value.replace(/\D/g, "");
-
-        if (account == "04556312939508") 
-            account = "MS00P04556312939508";
-        if (account == "0003494721779973")
-            account = "MS00P03494721779973";
-        
-        var name = document.getElementById("accountName").value;
-        var amount = document.getElementById("Amount").value;
-        var message = document.getElementById("message").value || "NGUYEN VAN DAT chuyen tien";
-
-        // Map bank ID to the actual bank name
-        const bankNames = {
-          "970415": "Ngân hàng TMCP Công Thương Việt Nam (Vietinbank)",
-          "970400": "Ngân hàng TMCP Sài Gòn Công Thương (SAIGONBANK)",
-          "970403": "Ngân hàng TMCP Sài Gòn Thương Tín (Sacombank)",
-          "970405": "Ngân hàng TMCP Nông Nghiệp và Phát triển nông thôn Việt Nam (Agribank)",
-          "970406": "DONG A Joint- Stock Commercial Bank (DongABank)",
-          "970407": "Ngân hàng TMCP Kỹ Thương Việt Nam (Techcombank)",
-          "970408": "Global Petro Sole Member Limited Commercial Bank (GPbank)",
-          "970414": "Ocean Commercial One Member Limited Liability Bank (OceanBank)",
-          "970416": "Ngân hàng TMCP Á Châu (ACB)",
-          "970418": "Ngân hàng TMCP Đầu Tư Phát Triển Việt Nam (BIDV)",
-          "970422": "Ngân hàng Quân đội (MB)",
-          "970448": "Ngân hàng TMCP Phương Đông (OCB)",
-          "970436": "Ngân hàng Ngoại thương Việt Nam (Vietcombank)",
-          "970423": "Ngân hàng Tiên Phong (TP Bank)",
-          "970432": "Ngân hàng TMCP Việt Nam Thịnh Vượng (VPBank)",
-          "970438": "Ngân hàng TMCP Bản Việt (BVBank)",
-          "970428": "Ngân hàng TMCP Nam Á (NamABank)"          
-        };
-
-        bank = bankNames[bank] || bank;
-
-        // Update the bill values
-        document.getElementById("bill-bank").textContent = bank;
-        document.getElementById("bill-account").textContent = account;
-        document.getElementById("bill-name").textContent = name;
-        document.getElementById("bill-amount").textContent = amount;
-        document.getElementById("bill-message").textContent = message;
-        document.getElementById("bill-code").textContent = "FT" + code;
-
-        // Show the bill and hide the form
-        document.getElementById("bill").style.display = "block";
-        document.getElementById("transfer-form").style.display = "none";
-      }
-
-      function generateCode(length) {
-        var characters = "0123456789";
-        var code = "";
-        for (var i = 0; i < length; i++) {
-          var randomIndex = Math.floor(Math.random() * characters.length);
-          code += characters.charAt(randomIndex);
-        }
-        return code;
-      }
-    </script>
-  </body>
 </html>
